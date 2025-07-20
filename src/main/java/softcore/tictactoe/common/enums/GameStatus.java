@@ -1,4 +1,4 @@
-package softcore.tictactoe.domain.model.entity;
+package softcore.tictactoe.common.enums;
 
 public enum GameStatus {
     IN_PROGRESS,

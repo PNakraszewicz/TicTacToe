@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS game (
+CREATE TABLE IF NOT EXISTS move (
                         id UUID PRIMARY KEY,
                         game_id UUID NOT NULL,
                         player VARCHAR(5) NOT NULL,

@@ -7,8 +7,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import softcore.tictactoe.BaseDatabaseTest;
 import softcore.tictactoe.domain.model.entity.Game;
-import softcore.tictactoe.domain.model.entity.GameStatus;
-import softcore.tictactoe.domain.model.entity.PlayerSymbol;
+import softcore.tictactoe.common.enums.GameStatus;
+import softcore.tictactoe.common.enums.PlayerSymbol;
 
 import java.util.Optional;
 
