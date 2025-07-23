@@ -3,8 +3,11 @@ package softcore.tictactoe.api.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import softcore.tictactoe.api.model.GameCreateResponse;
+import softcore.tictactoe.api.model.GameDetailsResponse;
 import softcore.tictactoe.api.model.MakeMoveCommand;
 import softcore.tictactoe.api.model.MakeMoveRequest;
+import softcore.tictactoe.domain.model.dto.GameDto;
 import softcore.tictactoe.facade.GameFacade;
 
 import java.util.UUID;
@@ -16,8 +19,19 @@ public class GameController {
 
     private final GameFacade gameFacade;
 
-    @PostMapping("/{gameId}/moves")
-    public ResponseEntity<Void> makeMove(
+    @PostMapping
+    public ResponseEntity<GameCreateResponse> createGame() {
+        GameDto dto = gameFacade.createNewGame();
+        return ResponseEntity.ok(GameCreateResponse.from(dto));
+    }
+
+    @GetMapping("/{gameId}")
+    public ResponseEntity<GameDetailsResponse> getGame(@PathVariable UUID gameId) {
+        return ResponseEntity.ok(gameFacade.getGameDetails(gameId));
+    }
+
+    @PostMapping("/{gameId}/move")
+    public ResponseEntity<GameDetailsResponse> makeMove(
             @PathVariable UUID gameId,
             @RequestBody MakeMoveRequest request) {
 
@@ -27,7 +41,6 @@ public class GameController {
                 request.y(),
                 request.player()
         );
-        gameFacade.makeMove(command);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(gameFacade.makeMove(command));
     }
 }

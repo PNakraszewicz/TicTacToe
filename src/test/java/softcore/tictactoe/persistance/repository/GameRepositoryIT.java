@@ -6,7 +6,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import softcore.tictactoe.BaseDatabaseTest;
-import softcore.tictactoe.domain.model.entity.Game;
+import softcore.tictactoe.domain.model.entity.GameEntity;
 import softcore.tictactoe.common.enums.GameStatus;
 import softcore.tictactoe.common.enums.PlayerSymbol;
 
@@ -25,16 +25,16 @@ class GameRepositoryIT extends BaseDatabaseTest {
     @Test
     void shouldSaveAndLoadGame() {
         // given
-        Game game = Game.builder()
+        GameEntity game = GameEntity.builder()
                 .playerTurn(PlayerSymbol.X)
                 .status(GameStatus.IN_PROGRESS)
                 .build();
 
         // when
-        Game saved = gameRepository.save(game);
+        GameEntity saved = gameRepository.save(game);
 
         // then
-        Optional<Game> found = gameRepository.findById(saved.getId());
+        Optional<GameEntity> found = gameRepository.findById(saved.getId());
         assertThat(found).isPresent();
         assertThat(found.get().getPlayerTurn()).isEqualTo(PlayerSymbol.X);
         assertThat(found.get().getStatus()).isEqualTo(GameStatus.IN_PROGRESS);

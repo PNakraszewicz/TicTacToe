@@ -1,0 +1,29 @@
+### Create a new game
+POST http://localhost:8080/api/games
+Content-Type: application/json
+### (no body required)
+
+
+### Make a move (player X in top-left corner)
+POST http://localhost:8080/api/games/5b983ce6-7b1c-453a-a27b-25d8b8eb1667/move
+Content-Type: application/json
+
+{
+  "x": 1,
+  "y": 0,
+  "player": "X"
+}
+
+### Make a move (player O in center)
+POST http://localhost:8080/api/games/5b983ce6-7b1c-453a-a27b-25d8b8eb1667/move
+Content-Type: application/json
+
+{
+  "x": 2,
+  "y": 1,
+  "player": "X"
+}
+
+### Get game details
+GET http://localhost:8080/api/games/5b983ce6-7b1c-453a-a27b-25d8b8eb1667
+Accept: application/json
